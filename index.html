@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aplikasi Pendataan Multi-Produk - Kampung Raja Prailiu</title>
+    <title>Sistem Pendataan Kelompok 1 - Kampung Raja Prailiu</title>
     <style>
         :root {
-            --primary-color: #8c2d2d; /* Merah Sumba */
-            --accent-color: #d9913c;  /* Kuning Sumba */
-            --bg-color: #faf6f0;      /* Krem Kain */
-            --text-color: #3d342e;
+            /* Palet Warna Biru Sesuai Request */
+            --blue-1: #b4beff; /* Biru sangat muda */
+            --blue-2: #8093ff; /* Biru muda */
+            --blue-3: #4d69ff; /* Biru sedang */
+            --blue-4: #002aff; /* Biru cerah */
+            --blue-5: #001ec6; /* Biru tua */
+            
+            --bg-color: #f4f6ff;
+            --text-color: #1a2035;
         }
 
         body {
@@ -25,38 +30,98 @@
             margin: 0 auto;
             background: #ffffff;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 42, 255, 0.05);
         }
 
+        /* Header Identitas Kampus & Kelompok */
         header {
-            text-align: center;
-            border-bottom: 3px solid var(--accent-color);
-            padding-bottom: 15px;
+            border-bottom: 4px solid var(--blue-4);
+            padding-bottom: 20px;
             margin-bottom: 30px;
         }
 
-        h1 { color: var(--primary-color); margin: 0 0 10px 0; font-size: 24px; }
-        p.subtitle { margin: 0; color: #665c54; font-size: 14px; }
+        .meta-kampus {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            font-weight: bold;
+            color: var(--blue-5);
+            margin-bottom: 8px;
+        }
+
+        h1 { 
+            color: var(--blue-4); 
+            text-align: center;
+            margin: 0 0 5px 0; 
+            font-size: 24px; 
+            font-weight: 800;
+        }
+        
+        .topik-box {
+            text-align: center;
+            font-size: 15px;
+            background-color: var(--blue-1);
+            color: var(--blue-5);
+            padding: 6px 12px;
+            border-radius: 20px;
+            display: table;
+            margin: 10px auto 15px auto;
+            font-weight: bold;
+        }
+
+        /* Grid Anggota Kelompok */
+        .kelompok-info {
+            background: #f8f9fa;
+            border: 1px solid var(--blue-2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .kelompok-title {
+            font-weight: bold;
+            color: var(--blue-5);
+            margin-bottom: 8px;
+            font-size: 14px;
+            border-bottom: 2px solid var(--blue-2);
+            padding-bottom: 4px;
+        }
+
+        .anggota-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+            font-size: 13px;
+        }
+
+        .anggota-item {
+            padding: 4px 8px;
+            background: #ffffff;
+            border-radius: 4px;
+            border-left: 3px solid var(--blue-3);
+        }
 
         .form-section {
-            background: #fdfbf7;
-            padding: 20px;
-            border: 1px solid #decbb7;
-            border-radius: 6px;
+            background: #ffffff;
+            padding: 25px;
+            border: 1px solid var(--blue-2);
+            border-radius: 8px;
             margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
         }
 
         .sub-form-block {
-            background: #ffffff;
-            border-left: 4px solid var(--accent-color);
+            background: var(--bg-color);
+            border-left: 4px solid var(--blue-4);
             padding: 15px;
             margin-top: 15px;
-            border-radius: 0 4px 4px 0;
+            border-radius: 0 6px 6px 0;
         }
 
-        h2 { color: var(--primary-color); font-size: 18px; margin-top: 0; }
-        h3 { color: var(--text-color); font-size: 14px; margin: 0 0 15px 0; border-bottom: 1px dashed #decbb7; padding-bottom: 5px; }
+        h2 { color: var(--blue-5); font-size: 18px; margin-top: 0; }
+        h3 { color: var(--text-color); font-size: 14px; margin: 0 0 15px 0; border-bottom: 1px dashed var(--blue-2); padding-bottom: 5px; }
 
         .grid-2 {
             display: grid;
@@ -72,15 +137,23 @@
             font-weight: bold;
             margin-bottom: 5px;
             font-size: 13px;
+            color: var(--blue-5);
         }
 
         input[type="text"], input[type="number"], select, textarea {
             width: 100%;
             padding: 10px;
-            border: 1px solid #decbb7;
-            border-radius: 4px;
+            border: 1px solid var(--blue-2);
+            border-radius: 6px;
             box-sizing: border-box;
             font-size: 14px;
+            background-color: #ffffff;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--blue-4);
+            box-shadow: 0 0 0 3px rgba(0, 42, 255, 0.1);
         }
 
         textarea { resize: vertical; height: 60px; }
@@ -88,6 +161,169 @@
         .btn-container {
             display: flex;
             gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn-primary { background-color: var(--blue-4); color: white; }
+        .btn-primary:hover { background-color: var(--blue-5); }
+        .btn-secondary { background-color: #343a40; color: white; }
+        .btn-secondary:hover { background-color: #212529; }
+
+        /* Output Desain Card & Tabel */
+        .galeri-card {
+            background: #ffffff;
+            border: 1px solid var(--blue-3);
+            border-radius: 8px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+        }
+
+        .galeri-header {
+            background: var(--blue-5);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .galeri-header h3 {
+            margin: 0;
+            border: none;
+            color: white;
+            font-size: 15px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid var(--blue-2);
+            padding: 12px 10px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th { background-color: var(--blue-1); color: var(--blue-5); font-weight: bold; }
+        tr:nth-child(even) { background-color: #fbfbfe; }
+
+        /* Aturan Khusus Saat PDF dicetak (Print Mode) */
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .form-section, .btn-container, .no-print { display: none !important; }
+            .galeri-card { page-break-inside: avoid; border: 1px solid #000; margin-bottom: 30px; }
+            .galeri-header { background: #001ec6 !important; color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            th { background-color: #b4beff !important; color: #001ec6 !important; border: 1px solid #000; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            td { border: 1px solid #000; }
+            .kelompok-info { border: 1px solid #000; background: #fff !important; }
+            .anggota-item { border-left: 3px solid #000; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <div class="meta-kampus">PROGRAM STUDI [NAMA PRODI] • FAKULTAS [NAMA FAKULTAS] • [NAMA UNIVERSITAS]</div>
+        <h1>MANUSKRIP HASIL RISET DATA LAPANGAN</h1>
+        <div class="topik-box">Studi Lokasi: Kampung Raja Prailiu (Fokus Tenun Ikat, Selendang & Aksesoris)</div>
+    </header>
+
+    <div class="kelompok-info">
+        <div class="kelompok-title">👥 TIM PENELITI (KELOMPOK 1) - KELAS: PEMROGRAMAN BERBASIS WEB 1</div>
+        <div class="anggota-grid">
+            <div class="anggota-item"><strong>1. NYONGKI DAKU ALI HARY</strong> (Ketua Kelompok)</div>
+            <div class="anggota-item"><strong>2. JESIKA GRACELA RAJA</strong> (Anggota)</div>
+            <div class="anggota-item"><strong>3. MARSELINA RAMBU KAITA PAY</strong> (Anggota)</div>
+            <div class="anggota-item"><strong>4. FERDINAND UMBU DUKA</strong> (Anggota)</div>
+            <div class="anggota-item"><strong>5. ARIFRESI R LAU OY</strong> (Anggota)</div>
+            <div class="anggota-item"><strong>6. EMELTON YIWA PANJUKANG</strong> (Anggota)</div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h2>➕ Registrasi Galeri & Sampel Kain</h2>
+        <form id="mainForm">
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="namaGaleri">Nama Galeri / Pemilik Toko</label>
+                    <input type="text" id="namaGaleri" placeholder="Misal: Galeri Maramba Prailiu" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsapp">No. WhatsApp Toko</label>
+                    <input type="text" id="whatsapp" placeholder="Contoh: 628xxxxxxxxxx" required>
+                </div>
+            </div>
+
+            <div class="sub-form-block">
+                <h3>Katalog Sampel Produk</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="namaProduk">Nama Kain / Aksesoris</label>
+                        <input type="text" id="namaProduk" placeholder="Contoh: Kain Hinggi Kombu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kategori">Kategori Item</label>
+                        <select id="kategori">
+                            <option value="Kain Utama (Hinggi/Lau)">Kain Utama (Hinggi/Lau)</option>
+                            <option value="Selendang (Tiara)">Selendang (Tiara)</option>
+                            <option value="Aksesoris (Kalung/Gelang/Lainnya)">Aksesoris (Kalung/Gelang/Lainnya)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga Jual (Rp)</label>
+                        <input type="number" id="harga" placeholder="Contoh: 2500000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ukuran">Dimensi / Ukuran Kain</label>
+                        <input type="text" id="ukuran" placeholder="Contoh: 240cm x 110cm">
+                    </div>
+                    <div class="form-group">
+                        <label for="pewarnaan">Sistem Pewarnaan</label>
+                        <select id="pewarnaan">
+                            <option value="Pewarna Alam (Mengkudu/Tarum)">Pewarna Alam (Mengkudu/Tarum)</option>
+                            <option value="Pewarna Kimia / Buatan">Pewarna Kimia / Buatan</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kodeFoto">Kode Arsip Foto</label>
+                        <input type="text" id="kodeFoto" placeholder="Contoh: KMP_RAJA_01.JPG">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="maknaMotif">Filosofi Motif & Keterangan Tambahan</label>
+                        <textarea id="maknaMotif" placeholder="Jelaskan arti lambang hewan/simbol adat pada objek kain ini..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <button type="submit" class="btn-primary">💾 Simpan Sampel Kain</button>
+                <button type="button" class="btn-secondary" onclick="exportKePDF()">📄 Cetak Hasil Lapangan (PDF)</button>
+            </div>
+        </form>
+    </div>
+
+    <h2>📋 Manuskrip Database Marketplace (Koleksi Kelompok 1)</h2>
+    <div id="databaseOutput"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
             margin-top: 20px;
         }
 
