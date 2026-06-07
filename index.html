@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Pendataan Multi-Produk - Kampung Raja Prailiu</title>
+    <style>
+        :root {
+            --primary-color: #8c2d2d; /* Merah Sumba */
+            --accent-color: #d9913c;  /* Kuning Sumba */
+            --bg-color: #faf6f0;      /* Krem Kain */
+            --text-color: #3d342e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        header {
+            text-align: center;
+            border-bottom: 3px solid var(--accent-color);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+
+        h1 { color: var(--primary-color); margin: 0 0 10px 0; font-size: 24px; }
+        p.subtitle { margin: 0; color: #665c54; font-size: 14px; }
+
+        .form-section {
+            background: #fdfbf7;
+            padding: 20px;
+            border: 1px solid #decbb7;
+            border-radius: 6px;
+            margin-bottom: 30px;
+        }
+
+        .sub-form-block {
+            background: #ffffff;
+            border-left: 4px solid var(--accent-color);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        h2 { color: var(--primary-color); font-size: 18px; margin-top: 0; }
+        h3 { color: var(--text-color); font-size: 14px; margin: 0 0 15px 0; border-bottom: 1px dashed #decbb7; padding-bottom: 5px; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .form-group { margin-bottom: 15px; }
+        .form-group.full-width { grid-column: span 2; }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #decbb7;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        textarea { resize: vertical; height: 60px; }
+
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn-primary { background-color: var(--primary-color); color: white; }
+        .btn-primary:hover { background-color: #6e2222; }
+        .btn-secondary { background-color: var(--accent-color); color: white; }
+        .btn-secondary:hover { background-color: #be7a2e; }
+
+        /* Desain Render Output Master-Detail */
+        .galeri-card {
+            background: #ffffff;
+            border: 1px solid #decbb7;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .galeri-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .galeri-header h3 {
+            margin: 0;
+            border: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #decbb7;
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th { background-color: #f1eae1; color: var(--text-color); font-weight: bold; }
+        tr:nth-child(even) { background-color: #fdfbf7; }
+
+        /* Print Layout Rules */
+        @media print {
+            body { background: white; padding: 0; }
+            .container { box-shadow: none; padding: 0; max-width: 100%; }
+            .form-section, .btn-container, .no-print { display: none !important; }
+            .galeri-card { page-break-inside: avoid; border: 1px solid #000; margin-bottom: 30px; }
+            .galeri-header { background: #5c1d1d !important; color: white !important; -webkit-print-color-adjust: exact; }
+            th { background-color: #e5e5e5 !important; border: 1px solid #000; }
+            td { border: 1px solid #000; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>MANUSKRIP DIGITAL DATA KAMPUNG RAJA PRAILIU</h1>
+        <p class="subtitle">Sistem Registrasi Kolektif Galeri & Multi-Sampel Produk Tenun Ikat</p>
+    </header>
+
+    <!-- Form Input Campuran -->
+    <div class="form-section">
+        <h2>➕ Registrasi Galeri & Sampel Kain</h2>
+        <form id="mainForm">
+            <!-- SEKSI DATA UTAMA GALERI -->
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="namaGaleri">Nama Galeri / Pemilik</label>
+                    <input type="text" id="namaGaleri" placeholder="Misal: Galeri Tenun Adat Raja Prailiu" required>
+                </div>
+                <div class="form-group">
+                    <label for="whatsapp">No. WhatsApp Pemilik</label>
+                    <input type="text" id="whatsapp" placeholder="Contoh: 6281234567890" required>
+                </div>
+            </div>
+
+            <!-- SEKSI INPUT SAMPEL PRODUK (BISA DITAMBAH BEBERAPA KALI) -->
+            <div class="sub-form-block">
+                <h3>Katalog Sampel Produk</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="namaProduk">Nama Produk / Kain</label>
+                        <input type="text" id="namaProduk" placeholder="Contoh: Kain Hinggi Kombu" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="kategori">Kategori Produk</label>
+                        <select id="kategori">
+                            <option value="Kain Utama (Hinggi/Lau)">Kain Utama (Hinggi/Lau)</option>
+                            <option value="Selendang (Tiara)">Selendang (Tiara)</option>
+                            <option value="Aksesoris (Kalung/Gelang)">Aksesoris (Kalung/Gelang)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="harga">Harga Jual (Rp)</label>
+                        <input type="number" id="harga" placeholder="Contoh: 3000000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ukuran">Dimensi / Ukuran</label>
+                        <input type="text" id="ukuran" placeholder="Contoh: 240cm x 115cm">
+                    </div>
+                    <div class="form-group">
+                        <label for="pewarnaan">Teknik Pewarnaan</label>
+                        <select id="pewarnaan">
+                            <option value="Pewarna Alam (Mengkudu/Tarum)">Pewarna Alam (Mengkudu/Tarum)</option>
+                            <option value="Pewarna Kimia / Toko">Pewarna Kimia / Toko</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="kodeFoto">Kode File Dokumentasi Foto</label>
+                        <input type="text" id="kodeFoto" placeholder="Contoh: PR_01_A.JPG">
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="maknaMotif">Filosofi & Makna Motif Kain</label>
+                        <textarea id="maknaMotif" placeholder="Tulis cerita atau arti simbolik motif kain di sini..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="btn-container">
+                <button type="submit" class="btn-primary">💾 Simpan Sampel Kain</button>
+                <button type="button" class="btn-secondary" onclick="exportKePDF()">📄 Eksport Semua ke PDF</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Lokasi Render Tabel Data -->
+    <h2>📋 Database Koleksi Toko & Katalog Lapangan</h2>
+    <div id="databaseOutput">
+        <!-- Komponen Kartu Toko dan Tabel Produk akan dirender lewat JavaScript di sini -->
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
